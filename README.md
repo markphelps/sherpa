@@ -49,7 +49,7 @@ npm run dev            # opens Chrome with hot reload
 
 | Variable                | Description                                    | Required |
 | ----------------------- | ---------------------------------------------- | -------- |
-| `VITE_WORKER_URL`       | Cloudflare Worker URL for OAuth and PR caching | Yes      |
+| `VITE_WORKER_URL`       | Cloudflare Worker URL (or `http://localhost:8787` for local dev) | Yes      |
 | `VITE_GITHUB_CLIENT_ID` | GitHub App client ID                           | Yes      |
 
 ```bash

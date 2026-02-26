@@ -1,5 +1,8 @@
 {
   "name": "sherpa-worker",
+  "description": "Cloudflare Worker for Sherpa OAuth and PR caching",
+  "license": "MIT",
+  "author": "Mark Phelps",
   "private": true,
   "scripts": {
     "dev": "wrangler dev",

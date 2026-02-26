@@ -1,6 +1,13 @@
 {
   "name": "sherpa",
+  "description": "LLM-powered PR review sidebar for GitHub",
   "version": "0.1.0",
+  "license": "MIT",
+  "author": "Mark Phelps",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/markphelps/sherpa.git"
+  },
   "private": true,
   "type": "module",
   "scripts": {
