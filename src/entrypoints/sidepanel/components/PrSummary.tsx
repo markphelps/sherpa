@@ -1,4 +1,4 @@
-import { Compass, Settings, X } from "lucide-react";
+import { Compass, Settings as SettingsIcon, X } from "lucide-react";
 import { useExplanation } from "@/entrypoints/sidepanel/hooks/useExplanation";
 import { Markdown } from "./Markdown";
 import { Skeleton } from "./Skeleton";
@@ -36,7 +36,7 @@ export function PrSummary({ cacheKey, onSettingsClick, onReset }: Props) {
             class="ml-auto text-stone-400 hover:text-stone-600 transition-colors p-0.5"
             aria-label="Settings"
           >
-            <Settings size={16} />
+            <SettingsIcon size={16} />
           </button>
         )}
       </div>

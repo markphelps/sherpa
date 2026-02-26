@@ -2,13 +2,12 @@ import {
   ArrowLeft,
   BrainCircuit,
   CloudCog,
-  Compass,
   Github,
   Heart,
   Monitor,
   Moon,
   Mountain,
-  Settings,
+  Settings as SettingsIcon,
   Sun,
   Trash2,
   Wrench,
@@ -189,7 +188,7 @@ export function SettingsPanel({ onClose, autoSync, onAutoSyncChange }: Props) {
           >
             <ArrowLeft size={18} />
           </button>
-          <Settings size={15} className="text-trail" />
+          <SettingsIcon size={15} className="text-trail" />
           <h2 class="text-base font-semibold tracking-tight text-stone-800 dark:text-stone-100">
             Settings
           </h2>
@@ -466,7 +465,7 @@ export function SettingsPanel({ onClose, autoSync, onAutoSyncChange }: Props) {
         {/* Preferences */}
         <fieldset>
           <legend class="flex items-center gap-1.5 mb-2.5">
-            <Settings size={14} className="text-stone-500" />
+            <SettingsIcon size={14} className="text-stone-500" />
             <span class="text-[13px] font-medium text-stone-500 uppercase tracking-wider">
               Preferences
             </span>
@@ -774,6 +773,7 @@ export function SettingsPanel({ onClose, autoSync, onAutoSyncChange }: Props) {
                 class="text-stone-400 hover:text-stone-600 transition-colors"
                 aria-label="@mark_a_phelps on X"
               >
+                <span class="sr-only">@mark_a_phelps on X</span>
                 <svg
                   aria-hidden="true"
                   width="14"
