@@ -1,0 +1,22 @@
+name = "sherpa-worker"
+main = "src/index.ts"
+compatibility_date = "2024-01-01"
+
+# Set all three via `wrangler secret put`:
+#   GITHUB_CLIENT_ID       - GitHub App client ID
+#   GITHUB_CLIENT_SECRET   - GitHub App client secret
+#   EXTENSION_ID           - Chrome extension ID (from chrome://extensions)
+
+[durable_objects]
+bindings = [
+  { name = "SHERPA_STATE", class_name = "SherpaState" }
+]
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["SherpaState"]
+
+[observability]
+[observability.logs]
+enabled = true
+invocation_logs = true

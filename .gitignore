@@ -1,0 +1,13 @@
+node_modules/
+.wxt/
+.output/
+dist/
+*.log
+.DS_Store
+docs/plans
+.beads/
+.worktrees/
+.claude/
+.envrc
+.dev.vars
+.npmrc

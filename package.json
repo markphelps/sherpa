@@ -1,0 +1,39 @@
+{
+  "name": "sherpa",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wxt",
+    "build": "wxt build",
+    "zip": "wxt zip",
+    "test": "vitest run",
+    "lint": "biome check .",
+    "lint:fix": "biome check --write .",
+    "format": "biome format --write . && prettier --write \"**/*.md\"",
+    "prepare": "husky"
+  },
+  "dependencies": {
+    "@ai-sdk/anthropic": "^3.0.46",
+    "@ai-sdk/google": "^3.0.30",
+    "@ai-sdk/openai": "^3.0.30",
+    "@preact/compat": "^18.3.1",
+    "@wxt-dev/module-react": "^1.1.5",
+    "ai": "^6.0.94",
+    "dompurify": "^3.3.1",
+    "lucide-react": "^0.575.0",
+    "marked": "^17.0.3",
+    "preact": "^10.28.4",
+    "wxt": "^0.20.17"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.4.4",
+    "@tailwindcss/vite": "^4.2.0",
+    "@types/dompurify": "^3.0.5",
+    "husky": "^9.1.7",
+    "jsdom": "^28.1.0",
+    "prettier": "^3.8.1",
+    "tailwindcss": "^4.2.0",
+    "vitest": "^4.0.18"
+  }
+}
