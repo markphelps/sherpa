@@ -18,7 +18,7 @@ The content script is intentionally minimal — it reads DOM structure and sends
 
 API keys and GitHub tokens are stored using a two-layer system:
 
-1. **Encrypted persistence** — Secrets are encrypted with AES-GCM (256-bit key, random 12-byte IV per write) before writing to `chrome.storage.local`. The key is derived via PBKDF2 (100,000 iterations, SHA-256) from the extension ID and a per-install random salt.
+1. **Obfuscated persistence** — Secrets are obfuscated with AES-GCM (256-bit key, random 12-byte IV per write) before writing to `chrome.storage.local`. The key is derived via PBKDF2 (100,000 iterations, SHA-256) from the extension ID and a per-install random salt.
 
 2. **Session cache** — On startup, secrets are decrypted into `chrome.storage.session` (memory-only, cleared when the browser closes). Session storage is configured with `TRUSTED_CONTEXTS` access level, which makes it available to the side panel but **not** to content scripts.
 
@@ -46,7 +46,7 @@ Security measures:
 - **CSRF protection** — The extension encodes a random nonce and the redirect URL into the OAuth `state` parameter. The worker decodes and validates this on callback, ensuring the flow was initiated by the extension.
 - **Redirect validation** — The worker validates that the redirect URL matches the `chromiumapp.org` pattern (`/^https:\/\/[a-z]{32}\.chromiumapp\.org\/?$/`) before redirecting. This prevents open-redirect attacks via the `state` parameter.
 - **Server-side secret** — The OAuth client secret never leaves the worker. The extension only knows the client ID.
-- **Token storage** — Access and refresh tokens are stored using the encrypted secret storage described above.
+- **Token storage** — Access and refresh tokens are stored using the obfuscated secret storage described above.
 
 ## Cloudflare Worker
 
@@ -100,7 +100,7 @@ Sherpa requests the minimum permissions needed:
 | Permission                                            | Purpose                                 |
 | ----------------------------------------------------- | --------------------------------------- |
 | `sidePanel`                                           | Display the explanation panel           |
-| `storage`                                             | Persist settings and encrypted secrets  |
+| `storage`                                             | Persist settings and obfuscated secrets |
 | `activeTab`                                           | Access the current tab for PR detection |
 | `identity`                                            | GitHub OAuth via `launchWebAuthFlow`    |
 | `host_permissions` for `github.com`, `api.github.com` | Read PR data                            |

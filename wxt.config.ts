@@ -28,8 +28,10 @@ export default defineConfig({
     content_scripts: [
       {
         matches: [
-          "https://github.com/*/*/pull/*/files*",
-          "https://github.com/*/*/pull/*/changes*",
+          "https://github.com/*/*/pull/*/files",
+          "https://github.com/*/*/pull/*/files/*",
+          "https://github.com/*/*/pull/*/changes",
+          "https://github.com/*/*/pull/*/changes/*",
         ],
         js: ["content-scripts/content.js"],
       },

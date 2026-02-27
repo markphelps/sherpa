@@ -14,7 +14,7 @@ When you open a GitHub PR's "Files changed" tab, Sherpa:
 2. **Explains files on demand** — click or scroll to a file to get a contextual explanation using the full diff and file content
 3. **Explains hunks on demand** — drill into individual code changes for line-level detail
 
-Explanations are streamed in real time and cached locally so revisiting a PR is instant. API keys are encrypted at rest using AES-GCM and only held in memory during the active session.
+Explanations are streamed in real time and cached locally so revisiting a PR is instant. API keys are obfuscated at rest (AES-GCM-based, not true encryption) and only held in memory during the active session.
 
 ## Architecture
 
