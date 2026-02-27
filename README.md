@@ -47,10 +47,10 @@ cp .env.example .env   # edit with your values
 npm run dev            # opens Chrome with hot reload
 ```
 
-| Variable                | Description                                    | Required |
-| ----------------------- | ---------------------------------------------- | -------- |
+| Variable                | Description                                                      | Required |
+| ----------------------- | ---------------------------------------------------------------- | -------- |
 | `VITE_WORKER_URL`       | Cloudflare Worker URL (or `http://localhost:8787` for local dev) | Yes      |
-| `VITE_GITHUB_CLIENT_ID` | GitHub App client ID                           | Yes      |
+| `VITE_GITHUB_CLIENT_ID` | GitHub App client ID                                             | Yes      |
 
 ```bash
 npm run build    # builds to .output/chrome-mv3/
