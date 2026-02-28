@@ -447,8 +447,7 @@ export function SettingsPanel({ onClose, autoSync, onAutoSyncChange }: Props) {
                   const val = (e.target as HTMLInputElement).value;
                   if (
                     val === "" ||
-                    (/^https:\/\//i.test(val) &&
-                      /\.workers\.dev(\/|$)/i.test(val))
+                    /^https?:\/\//i.test(val)
                   ) {
                     save({ ...settings, workerUrl: val });
                   }
@@ -457,8 +456,7 @@ export function SettingsPanel({ onClose, autoSync, onAutoSyncChange }: Props) {
             </div>
           </div>
           <p class="text-xs text-stone-500 mt-1.5 px-0.5">
-            Backend server for authentication and caching. Must be an HTTPS
-            *.workers.dev URL.
+            Backend server for authentication and caching.
           </p>
         </fieldset>
 
