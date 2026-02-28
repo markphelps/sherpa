@@ -1,3 +1,2 @@
-export PATH="$HOME/.local/share/mise/shims:$PATH"
-pnpm run format
+mise exec -- pnpm run format
 git update-index --again

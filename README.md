@@ -39,10 +39,10 @@ See [SECURITY.md](SECURITY.md) for details on how Sherpa handles API keys, OAuth
 
 **For a complete step-by-step guide** covering the extension, Cloudflare Worker, GitHub App, and LLM provider setup, see **[SETUP.md](SETUP.md)**.
 
-Requires [mise](https://mise.jdx.dev) for tool management (installs node + pnpm from `.mise.toml`). After installing mise, add its shims to your PATH:
+Requires [mise](https://mise.jdx.dev) for tool management (installs node + pnpm from `.mise.toml`). After [installing mise](https://mise.jdx.dev/getting-started.html), activate it in your shell:
 
 ```bash
-echo 'export PATH="$HOME/.local/share/mise/shims:$PATH"' >> ~/.zshrc  # or ~/.bashrc
+echo 'eval "$(mise activate zsh)"' >> ~/.zshrc   # or bash/fish — see mise docs
 ```
 
 Quick start for development:

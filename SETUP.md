@@ -28,9 +28,9 @@ LLM calls go **directly from your browser** to the provider — no intermediary.
 
 ## Prerequisites
 
-- **[mise](https://mise.jdx.dev)** (or Node.js 22+ and pnpm manually). After installing mise, add its shims to your PATH so tools are available in all shells:
+- **[mise](https://mise.jdx.dev)** (or Node.js 22+ and pnpm manually). After [installing mise](https://mise.jdx.dev/getting-started.html), activate it in your shell:
   ```bash
-  echo 'export PATH="$HOME/.local/share/mise/shims:$PATH"' >> ~/.zshrc  # or ~/.bashrc
+  echo 'eval "$(mise activate zsh)"' >> ~/.zshrc  # or bash/fish — see mise docs
   ```
 - **A Cloudflare account** (free tier works) — [sign up](https://dash.cloudflare.com/sign-up)
 - **A GitHub account**
