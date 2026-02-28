@@ -761,7 +761,7 @@ export function SettingsPanel({ onClose, autoSync, onAutoSyncChange }: Props) {
         <div class="pt-2 pb-4">
           <div class="flex flex-col items-center gap-3 text-center">
             <div class="flex items-center gap-1.5 text-xs text-stone-400">
-              <span>Built with</span>
+              <span>Packed with</span>
               <Heart size={12} className="text-ridge" />
               <span>by Mark Phelps</span>
             </div>
