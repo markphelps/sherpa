@@ -445,10 +445,7 @@ export function SettingsPanel({ onClose, autoSync, onAutoSyncChange }: Props) {
                 value={settings.workerUrl}
                 onInput={(e) => {
                   const val = (e.target as HTMLInputElement).value;
-                  if (
-                    val === "" ||
-                    /^https?:\/\//i.test(val)
-                  ) {
+                  if (val === "" || /^https?:\/\//i.test(val)) {
                     save({ ...settings, workerUrl: val });
                   }
                 }}

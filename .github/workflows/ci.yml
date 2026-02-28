@@ -12,34 +12,26 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: npm
-      - run: npm ci
-      - run: npx biome ci .
-      - run: npx prettier --check "**/*.md"
+      - uses: jdx/mise-action@v2
+      - run: pnpm install
+      - run: pnpm exec biome ci .
+      - run: pnpm exec prettier --check "**/*.md"
 
   test:
     name: Extension Tests
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: npm
-      - run: npm ci
-      - run: npx wxt prepare
-      - run: npm test
+      - uses: jdx/mise-action@v2
+      - run: pnpm install
+      - run: cd browser && pnpm exec wxt prepare
+      - run: cd browser && pnpm test
 
   worker-typecheck:
     name: Worker Typecheck
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-      - run: cd worker && npm ci
-      - run: cd worker && npx tsc --noEmit
+      - uses: jdx/mise-action@v2
+      - run: pnpm install
+      - run: cd worker && pnpm exec tsc --noEmit

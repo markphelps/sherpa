@@ -28,7 +28,10 @@ LLM calls go **directly from your browser** to the provider — no intermediary.
 
 ## Prerequisites
 
-- **Node.js 18+** and npm
+- **[mise](https://mise.jdx.dev)** (or Node.js 22+ and pnpm manually). After [installing mise](https://mise.jdx.dev/getting-started.html), activate it in your shell:
+  ```bash
+  echo 'eval "$(mise activate zsh)"' >> ~/.zshrc  # or bash/fish — see mise docs
+  ```
 - **A Cloudflare account** (free tier works) — [sign up](https://dash.cloudflare.com/sign-up)
 - **A GitHub account**
 - **A Chrome-based browser** (Chrome, Brave, Arc, Edge, etc.)
@@ -44,14 +47,15 @@ LLM calls go **directly from your browser** to the provider — no intermediary.
 ```bash
 git clone https://github.com/markphelps/sherpa.git
 cd sherpa
-npm install
+mise install      # install node + pnpm (from .mise.toml)
+pnpm install
 ```
 
 Install the worker dependencies too:
 
 ```bash
 cd worker
-npm install
+pnpm install
 cd ..
 ```
 
@@ -91,13 +95,13 @@ Leave all other permissions as "No access".
 
 ## Step 3: Configure the Extension
 
-Create a `.env` file in the project root:
+Create a `.env` file in the `browser/` directory:
 
 ```bash
-cp .env.example .env
+cp browser/.env.example browser/.env
 ```
 
-Edit `.env` with your values:
+Edit `browser/.env` with your values:
 
 ```bash
 # Your Cloudflare Worker URL (from Step 4)
@@ -139,7 +143,7 @@ npx wrangler secret put EXTENSION_ID
 ### 4c. Deploy
 
 ```bash
-npm run deploy
+pnpm run deploy
 ```
 
 The output will show your worker URL, something like:
@@ -159,11 +163,11 @@ https://sherpa-worker.your-account.workers.dev/callback
 
 ### 4e. Update .env
 
-If you used a placeholder in Step 3, update `VITE_WORKER_URL` in your `.env` with the real worker URL and rebuild:
+If you used a placeholder in Step 3, update `VITE_WORKER_URL` in your `browser/.env` with the real worker URL and rebuild:
 
 ```bash
-cd ..
-npm run build
+cd ../browser
+pnpm run build
 ```
 
 ---
@@ -173,17 +177,18 @@ npm run build
 ### Build
 
 ```bash
-npm run build
+cd browser
+pnpm run build
 ```
 
-This outputs a production build to `.output/chrome-mv3/`.
+This outputs a production build to `browser/.output/chrome-mv3/`.
 
 ### Load in Chrome
 
 1. Open `chrome://extensions/` in your browser
 2. Enable **"Developer mode"** (toggle in the top right)
 3. Click **"Load unpacked"**
-4. Select the `.output/chrome-mv3/` directory
+4. Select the `browser/.output/chrome-mv3/` directory
 
 The Sherpa icon should appear in your toolbar.
 
@@ -277,7 +282,8 @@ npx wrangler tail
 For local development with hot reload:
 
 ```bash
-npm run dev
+cd browser
+pnpm run dev
 ```
 
 WXT opens Chrome with the extension loaded and watches for file changes.
@@ -286,10 +292,10 @@ To run the worker locally:
 
 ```bash
 cd worker
-npm run dev
+pnpm run dev
 ```
 
-Then set `VITE_WORKER_URL=http://localhost:8787` in your `.env`.
+Then set `VITE_WORKER_URL=http://localhost:8787` in your `browser/.env`.
 
 ---
 
@@ -299,8 +305,9 @@ To update to the latest version:
 
 ```bash
 git pull
-npm install
-npm run build
+mise install      # pick up any tool version changes
+pnpm install
+cd browser && pnpm run build
 ```
 
 Then refresh the extension at `chrome://extensions/`.
@@ -309,8 +316,8 @@ If the worker code changed:
 
 ```bash
 cd worker
-npm install
-npm run deploy
+pnpm install
+pnpm run deploy
 ```
 
 ---

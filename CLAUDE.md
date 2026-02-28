@@ -9,24 +9,43 @@ A Chrome extension (Manifest V3) that provides LLM-powered explanations in a sid
 ## Commands
 
 ```bash
-npm run dev      # Start dev server with hot reload (opens Chrome with extension loaded)
-npm run build    # Build to .output/chrome-mv3/
-npm run zip      # Build + create distributable zip
-npm test         # Run all tests (vitest)
-npx vitest run src/path/to/file.test.ts  # Run a single test file
+# From root — shared tooling
+mise install             # Install node + pnpm (from .mise.toml)
+pnpm install             # Install all workspace dependencies
+pnpm run lint            # Biome check across all packages
+pnpm run format          # Biome + Prettier formatting
+pnpm test                # Run tests across all packages
+
+# Browser extension (from browser/)
+cd browser
+pnpm run dev             # Start dev server with hot reload
+pnpm run build           # Build to .output/chrome-mv3/
+pnpm run zip             # Build + create distributable zip
+pnpm test                # Run extension tests (vitest)
+pnpm exec vitest run src/path/to/file.test.ts  # Run a single test file
+
+# Worker (from worker/)
+cd worker
+pnpm run dev             # Start wrangler dev server
+pnpm run deploy          # Deploy to Cloudflare
 ```
 
-The `worker/` directory is a separate Cloudflare Worker project (OAuth token exchange + PR cache) with its own `package.json`. Use `cd worker && npm install` separately.
+This is a **pnpm monorepo** with two packages:
+
+- `browser/` — the Chrome extension
+- `worker/` — Cloudflare Worker (OAuth token exchange + PR cache)
+
+Shared tooling (biome, prettier, husky) lives at the root. Tool versions (node, pnpm) are pinned in `.mise.toml` and managed by [mise](https://mise.jdx.dev).
 
 ## Architecture
 
 See [ARCHITECTURE.md](ARCHITECTURE.md) for detailed architecture documentation. Key points for development:
 
-- Three entrypoints (content script, side panel, background worker) communicate via typed messages in `src/utils/messaging.ts`.
-- Preact is aliased to React in `wxt.config.ts` — use React import syntax.
-- All GitHub CSS selectors are isolated in `src/providers/github/selectors.ts` — update there when GitHub changes DOM structure.
-- LLM calls go directly from the browser to providers (no proxy). Configured in `src/entrypoints/background/llm.ts`.
-- Generated/lock file detection lives in `src/utils/generated-files.ts` — controls auto-collapse during scroll sync.
+- Three entrypoints (content script, side panel, background worker) communicate via typed messages in `browser/src/utils/messaging.ts`.
+- Preact is aliased to React in `browser/wxt.config.ts` — use React import syntax.
+- All GitHub CSS selectors are isolated in `browser/src/providers/github/selectors.ts` — update there when GitHub changes DOM structure.
+- LLM calls go directly from the browser to providers (no proxy). Configured in `browser/src/entrypoints/background/llm.ts`.
+- Generated/lock file detection lives in `browser/src/utils/generated-files.ts` — controls auto-collapse during scroll sync.
 - The `worker/` directory is a separate Cloudflare Worker handling OAuth token exchange and a Durable Objects PR cache.
 
 ## Issue Tracking
