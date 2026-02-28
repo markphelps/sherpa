@@ -10,6 +10,7 @@ A Chrome extension (Manifest V3) that provides LLM-powered explanations in a sid
 
 ```bash
 # From root — shared tooling
+mise install             # Install node + pnpm (from .mise.toml)
 pnpm install             # Install all workspace dependencies
 pnpm run lint            # Biome check across all packages
 pnpm run format          # Biome + Prettier formatting
@@ -34,7 +35,7 @@ This is a **pnpm monorepo** with two packages:
 - `browser/` — the Chrome extension
 - `worker/` — Cloudflare Worker (OAuth token exchange + PR cache)
 
-Shared tooling (biome, prettier, husky) lives at the root.
+Shared tooling (biome, prettier, husky) lives at the root. Tool versions (node, pnpm) are pinned in `.mise.toml` and managed by [mise](https://mise.jdx.dev).
 
 ## Architecture
 

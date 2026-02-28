@@ -12,11 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: pnpm
+      - uses: jdx/mise-action@v2
       - run: pnpm install
       - run: pnpm exec biome ci .
       - run: pnpm exec prettier --check "**/*.md"
@@ -26,11 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: pnpm
+      - uses: jdx/mise-action@v2
       - run: pnpm install
       - run: cd browser && pnpm exec wxt prepare
       - run: cd browser && pnpm test
@@ -40,10 +32,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: pnpm
+      - uses: jdx/mise-action@v2
       - run: pnpm install
       - run: cd worker && pnpm exec tsc --noEmit

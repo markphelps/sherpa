@@ -28,7 +28,10 @@ LLM calls go **directly from your browser** to the provider — no intermediary.
 
 ## Prerequisites
 
-- **Node.js 18+** and pnpm
+- **[mise](https://mise.jdx.dev)** (or Node.js 22+ and pnpm manually). After installing mise, add its shims to your PATH so tools are available in all shells:
+  ```bash
+  echo 'export PATH="$HOME/.local/share/mise/shims:$PATH"' >> ~/.zshrc  # or ~/.bashrc
+  ```
 - **A Cloudflare account** (free tier works) — [sign up](https://dash.cloudflare.com/sign-up)
 - **A GitHub account**
 - **A Chrome-based browser** (Chrome, Brave, Arc, Edge, etc.)
@@ -44,6 +47,7 @@ LLM calls go **directly from your browser** to the provider — no intermediary.
 ```bash
 git clone https://github.com/markphelps/sherpa.git
 cd sherpa
+mise install      # install node + pnpm (from .mise.toml)
 pnpm install
 ```
 
@@ -301,6 +305,7 @@ To update to the latest version:
 
 ```bash
 git pull
+mise install      # pick up any tool version changes
 pnpm install
 cd browser && pnpm run build
 ```

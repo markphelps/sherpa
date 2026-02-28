@@ -7,6 +7,7 @@ Thanks for your interest in contributing to Sherpa! Here's what you need to know
 ```bash
 git clone https://github.com/markphelps/sherpa.git
 cd sherpa
+mise install                           # install node + pnpm (from .mise.toml)
 pnpm install
 cp browser/.env.example browser/.env   # edit with your values
 cd browser && pnpm run dev             # opens Chrome with hot reload

@@ -39,9 +39,16 @@ See [SECURITY.md](SECURITY.md) for details on how Sherpa handles API keys, OAuth
 
 **For a complete step-by-step guide** covering the extension, Cloudflare Worker, GitHub App, and LLM provider setup, see **[SETUP.md](SETUP.md)**.
 
+Requires [mise](https://mise.jdx.dev) for tool management (installs node + pnpm from `.mise.toml`). After installing mise, add its shims to your PATH:
+
+```bash
+echo 'export PATH="$HOME/.local/share/mise/shims:$PATH"' >> ~/.zshrc  # or ~/.bashrc
+```
+
 Quick start for development:
 
 ```bash
+mise install                           # install node + pnpm (from .mise.toml)
 pnpm install
 cp browser/.env.example browser/.env   # edit with your values
 cd browser && pnpm run dev             # opens Chrome with hot reload
@@ -66,6 +73,7 @@ To run the full stack locally you need two terminals — one for the extension a
 ### 1. Extension
 
 ```bash
+mise install         # install node + pnpm (one-time)
 pnpm install        # from root — installs all workspace deps
 cd browser
 pnpm run dev
