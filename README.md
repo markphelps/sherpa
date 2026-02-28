@@ -58,6 +58,67 @@ npm run zip      # builds and creates a zip for distribution
 npm test         # run tests
 ```
 
+## Local development (extension + worker)
+
+To run the full stack locally you need two terminals — one for the extension and one for the Cloudflare Worker.
+
+### 1. Extension
+
+```bash
+npm install
+npm run dev
+```
+
+This starts the WXT dev server with hot reload and opens Chrome with the extension loaded. Note your extension ID from `chrome://extensions`.
+
+### 2. Worker
+
+```bash
+cd worker
+npm install
+npm run dev   # starts wrangler dev on localhost:8787
+```
+
+Create a `worker/.dev.vars` file with your secrets:
+
+```
+GITHUB_CLIENT_ID=your_github_app_client_id
+GITHUB_CLIENT_SECRET=your_github_app_client_secret
+EXTENSION_ID=your_chrome_extension_id
+```
+
+Set `EXTENSION_ID` to the value from `chrome://extensions` so that CORS allows requests from your local extension.
+
+### 3. Point the extension at the local worker
+
+Set `VITE_WORKER_URL` in your root `.env` file:
+
+```
+VITE_WORKER_URL=http://localhost:8787
+```
+
+Alternatively, you can change the Worker URL in the extension's settings panel after loading it.
+
+### 4. Tunnel for GitHub OAuth
+
+GitHub OAuth requires a publicly reachable callback URL, so you need to tunnel your local worker. Using [Cloudflare Tunnel](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/):
+
+```bash
+cloudflared tunnel --url http://localhost:8787
+```
+
+Or with [ngrok](https://ngrok.com/):
+
+```bash
+ngrok http 8787
+```
+
+Then:
+
+1. Set `VITE_WORKER_URL` in your `.env` to the tunnel URL (e.g. `https://abc123.trycloudflare.com`)
+2. Update your GitHub App's **Authorization callback URL** to `<tunnel-url>/callback`
+3. Restart `npm run dev` so the extension picks up the new URL
+
 ## Cost estimate
 
 For a ~2400-line, 30-file PR, a full read-through costs roughly $0.10–0.30 depending on the LLM provider. Lazy loading means most reviews cost far less since you won't expand every file and hunk.
