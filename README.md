@@ -1,7 +1,7 @@
 # Sherpa
 
 <p align="center">
-  <img src="public/sherpa.png" alt="Sherpa" width="200" />
+  <img src="browser/public/sherpa.png" alt="Sherpa" width="200" />
 </p>
 
 A browser extension that guides you through pull requests with live, LLM-powered explanations as you review code. Renders a sidebar with layered progressive disclosure: PR summary, file-level explanations, and hunk-level detail.
@@ -42,9 +42,9 @@ See [SECURITY.md](SECURITY.md) for details on how Sherpa handles API keys, OAuth
 Quick start for development:
 
 ```bash
-npm install
-cp .env.example .env   # edit with your values
-npm run dev            # opens Chrome with hot reload
+pnpm install
+cp browser/.env.example browser/.env   # edit with your values
+cd browser && pnpm run dev             # opens Chrome with hot reload
 ```
 
 | Variable                | Description                                                      | Required |
@@ -53,9 +53,10 @@ npm run dev            # opens Chrome with hot reload
 | `VITE_GITHUB_CLIENT_ID` | GitHub App client ID                                             | Yes      |
 
 ```bash
-npm run build    # builds to .output/chrome-mv3/
-npm run zip      # builds and creates a zip for distribution
-npm test         # run tests
+cd browser
+pnpm run build    # builds to .output/chrome-mv3/
+pnpm run zip      # builds and creates a zip for distribution
+pnpm test         # run tests
 ```
 
 ## Local development (extension + worker)
@@ -65,8 +66,9 @@ To run the full stack locally you need two terminals — one for the extension a
 ### 1. Extension
 
 ```bash
-npm install
-npm run dev
+pnpm install        # from root — installs all workspace deps
+cd browser
+pnpm run dev
 ```
 
 This starts the WXT dev server with hot reload and opens Chrome with the extension loaded. Note your extension ID from `chrome://extensions`.
@@ -75,8 +77,7 @@ This starts the WXT dev server with hot reload and opens Chrome with the extensi
 
 ```bash
 cd worker
-npm install
-npm run dev   # starts wrangler dev on localhost:8787
+pnpm run dev   # starts wrangler dev on localhost:8787
 ```
 
 Create a `worker/.dev.vars` file with your secrets:
@@ -91,7 +92,7 @@ Set `EXTENSION_ID` to the value from `chrome://extensions` so that CORS allows r
 
 ### 3. Point the extension at the local worker
 
-Set `VITE_WORKER_URL` in your root `.env` file:
+Set `VITE_WORKER_URL` in your `browser/.env` file:
 
 ```
 VITE_WORKER_URL=http://localhost:8787
@@ -115,9 +116,9 @@ ngrok http 8787
 
 Then:
 
-1. Set `VITE_WORKER_URL` in your `.env` to the tunnel URL (e.g. `https://abc123.trycloudflare.com`)
+1. Set `VITE_WORKER_URL` in your `browser/.env` to the tunnel URL (e.g. `https://abc123.trycloudflare.com`)
 2. Update your GitHub App's **Authorization callback URL** to `<tunnel-url>/callback`
-3. Restart `npm run dev` so the extension picks up the new URL
+3. Restart `pnpm run dev` (in `browser/`) so the extension picks up the new URL
 
 ## Cost estimate
 
@@ -142,7 +143,7 @@ Default patterns:
 
 ## Known limitations
 
-- **GitHub DOM fragility** — The content script relies on GitHub's CSS class names, which are not a stable API. All selectors are isolated in `src/providers/github/selectors.ts` for easy updates when GitHub changes their markup. A validation check on load warns if expected elements aren't found.
+- **GitHub DOM fragility** — The content script relies on GitHub's CSS class names, which are not a stable API. All selectors are isolated in `browser/src/providers/github/selectors.ts` for easy updates when GitHub changes their markup. A validation check on load warns if expected elements aren't found.
 - **Token budget** — Very large PRs with full file context can approach provider token limits. Mitigated by lazy loading at the file/hunk level rather than sending entire PRs.
 - **GitHub only** — The provider abstraction (`CodeReviewProvider` + `DOMAdapter`) is designed for adding GitLab and other platforms, but only GitHub is implemented today.
 

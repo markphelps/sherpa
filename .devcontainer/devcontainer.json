@@ -32,6 +32,6 @@
     "source=${localEnv:HOME}/.claude,target=/home/node/.claude,type=bind,consistency=cached"
   ],
   "forwardPorts": [3000],
-  "postCreateCommand": "npm install && cd worker && npm install && claude --version",
+  "postCreateCommand": "corepack enable && pnpm install && claude --version",
   "remoteUser": "node"
 }
