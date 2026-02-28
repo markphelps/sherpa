@@ -123,11 +123,22 @@ Then:
 
 For a ~2400-line, 30-file PR, a full read-through costs roughly $0.10–0.30 depending on the LLM provider. Lazy loading means most reviews cost far less since you won't expand every file and hunk.
 
-### Generated files
+## Generated files
 
 Generated and lock files (e.g. `package-lock.json`, `yarn.lock`, `*.min.js`) are automatically kept collapsed during scroll sync so they don't clutter the sidebar. A small "gen" badge appears next to their filename. You can still expand them manually by clicking.
 
-Default patterns: `package-lock.json`, `yarn.lock`, `pnpm-lock.yaml`, `*.lock`, `go.sum`, `*.min.js`, `*.min.css`, `*.generated.*`, `*.g.dart`, `*.pb.go`.
+Default patterns:
+
+- `package-lock.json`
+- `yarn.lock`
+- `pnpm-lock.yaml`
+- `*.lock`
+- `go.sum`
+- `*.min.js`
+- `*.min.css`
+- `*.generated.*`
+- `*.g.dart`
+- `*.pb.go`
 
 ## Known limitations
 
@@ -137,4 +148,4 @@ Default patterns: `package-lock.json`, `yarn.lock`, `pnpm-lock.yaml`, `*.lock`, 
 
 ## License
 
-MIT
+[MIT](LICENSE)
