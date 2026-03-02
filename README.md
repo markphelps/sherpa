@@ -1,7 +1,7 @@
 # Sherpa
 
 <p align="center">
-  <img src="browser/public/sherpa.png" alt="Sherpa" width="200" />
+  <img src="./.github/images/demo.png" alt="Sherpa" width="300" />
 </p>
 
 A browser extension that guides you through pull requests with live, LLM-powered explanations as you review code. Renders a sidebar with layered progressive disclosure: PR summary, file-level explanations, and hunk-level detail.
